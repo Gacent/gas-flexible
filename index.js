@@ -1,5 +1,5 @@
 (function flexible(window, document) {
-  window.initFlexible = function(design) {
+  window.initFlexible = function(isNew,design) {
     var docEl = document.documentElement;
     var dpr = window.devicePixelRatio || 1;
     var screenRatioByDesign = design ? design : 16 / 9;
@@ -15,6 +15,7 @@
 
     // set 1rem = viewWidth / 10
     function setRemUnit() {
+      // 使用比例型，宽高变化
       var screenRatio = docEl.clientWidth / docEl.clientHeight;
       var fontSize =
         ((screenRatio > screenRatioByDesign
@@ -26,13 +27,18 @@
       docEl.style.fontSize = fontSize.toFixed(3) + "px";
     }
 
-    setRemUnit();
-
+    function setMoRemUnit() {
+      var rem = docEl.clientWidth / 10
+      docEl.style.fontSize = rem + 'px'
+    }
+    
+    var endUnit = isNew?setRemUnit:setMoRemUnit
+    endUnit();
     // reset rem unit on page resize
-    window.addEventListener("resize", setRemUnit);
+    window.addEventListener("resize", endUnit);
     window.addEventListener("pageshow", function(e) {
       if (e.persisted) {
-        setRemUnit();
+        endUnit();
       }
     });
 
