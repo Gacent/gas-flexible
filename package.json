@@ -1,0 +1,23 @@
+{
+  "name": "gas-flexible",
+  "version": "0.1.0",
+  "description": "Build flexible page on mobile platform",
+  "keywords": [
+    "lib",
+    "amfe",
+    "flexible",
+    "mobile",
+    "css",
+    "rem",
+    "vw"
+  ],
+  "main": "./index.min.js",
+  "scripts": {
+    "compress": "uglifyjs index.js -o index.min.js -c -m"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "uglify-js": "^3.0.27"
+  },
+  "license": "MIT"
+}
